@@ -9,11 +9,13 @@ app.use(express.json());
 
 app.use("/api/portfolio", portfolioRoute);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 const path = require("path");
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
+
+  // All routes should serve the React index.html file
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build/index.html"));
   });
